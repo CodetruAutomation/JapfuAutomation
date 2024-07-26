@@ -5,29 +5,31 @@
         <listener class-name="com.codetru.listeners.AnnotationTransformer" />
     </listeners>
    <test name="DOID Organization">
-      
-        <parameter name="USERID" value="emma@doid.ai" />
-        <parameter name="PASSWORD" value="Codetru@007" />
         
         <classes>
-            <class name="com.codetru.project.Japfu.testcases.A_LoginTest" />
-              <class name="com.codetru.project.Japfu.testcases.DashboardValidationTest" />
+    		<class name="com.codetru.project.Japfu.testcases.A_LoginTest" />
+          	<class name="com.codetru.project.Japfu.testcases.DashboardValidationTest" />
             <class name="com.codetru.project.Japfu.testcases.B_Onboard_Employee_Test" />
-            <class name="com.codetru.project.Japfu.testcases.C_Client_Onboard_Test" />
+       		<class name="com.codetru.project.Japfu.testcases.C_Client_Onboard_Test" />
             <class name="com.codetru.project.Japfu.testcases.D_Placement_Test" />
             <class name="com.codetru.project.Japfu.testcases.E_Timesheet_Submission_Test" />
             <class name="com.codetru.project.Japfu.testcases.F_Timesheet_Approval_Test" />
+            <class name="com.codetru.project.Japfu.testcases.Employee_Edit_and_Submit_Test" />
+            <class name="com.codetru.project.Japfu.testcases.Approve_Employee_Edits_Test" />
+            
         </classes>
-    </test>
+        
+ </test>
     
     	 <test name="Codetru Organization">
-        <parameter name="USERID" value="jasim.m@codetru.com" />
-        <parameter name="PASSWORD" value="Codetru@007" />
-        
+			 
         <classes>
             <class name="com.codetru.project.Japfu.testcases.E_Timesheet_Submission_Codetru_Test" />
             <class name="com.codetru.project.Japfu.testcases.F_Timesheet_Approval_Codetru_Test" />
         </classes>
+        
     </test>
     
 </suite>
+<!-- 
+-->

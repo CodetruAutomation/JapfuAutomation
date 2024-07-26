@@ -1,5 +1,24 @@
 package com.codetru.listeners;
 
+import static com.Japfu.constants.FrameworkConstants.SCREENSHOT_FAILED_STEPS;
+import static com.Japfu.constants.FrameworkConstants.SCREENSHOT_PASSED_STEPS;
+import static com.Japfu.constants.FrameworkConstants.SCREENSHOT_SKIPPED_STEPS;
+import static com.Japfu.constants.FrameworkConstants.VIDEO_RECORD;
+import static com.Japfu.constants.FrameworkConstants.YES;
+
+
+import java.awt.AWTException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener;
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
 import com.Japfu.annotations.FrameworkAnnotation;
 import com.Japfu.constants.FrameworkConstants;
 import com.Japfu.driver.DriverManager;
@@ -16,23 +35,13 @@ import com.Japfu.report.ExtentReportManager;
 import com.Japfu.report.TelegramManager;
 import com.Japfu.utils.BrowserInfoUtils;
 import com.Japfu.utils.EmailSendUtils;
+import com.Japfu.utils.JiraCreateIssue;
+import com.Japfu.utils.JiraServiceProvider;
 import com.Japfu.utils.LogUtils;
 import com.Japfu.utils.ZipUtils;
 import com.aventstack.extentreports.Status;
 import com.github.automatedowl.tools.AllureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
-import io.qameta.allure.Allure;
-import io.qameta.allure.listener.TestLifecycleListener;
-import io.qameta.allure.model.TestResult;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.testng.*;
-
-import static com.Japfu.constants.FrameworkConstants.*;
-
-import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 public class TestListener implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
@@ -40,7 +49,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
     static int count_passedTCs;
     static int count_skippedTCs;
     static int count_failedTCs;
-
+    public static String currentMethodName;
     private ScreenRecoderHelpers screenRecorder;
     
     public TestListener() {
@@ -167,11 +176,13 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
         LogUtils.error("Test case: " + getTestName(iTestResult) + " is failed.");
         count_failedTCs = count_failedTCs + 1;
 
         if (SCREENSHOT_FAILED_STEPS.equals(YES)) {
             CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
+           
         }
 
         if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
@@ -188,7 +199,22 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
 
         //AllureManager.takeScreenshotToAttachOnAllureReport();
         //AllureManager.saveTextLog(iTestResult.getThrowable().toString());
+        
+        //Integration with Jira (create new issue)
 
+        boolean isLogIssue = iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(JiraCreateIssue.class).isCreateIssue();
+        if (isLogIssue) {
+            JiraServiceProvider JiraServiceProvider = new JiraServiceProvider();
+            String issueDescription = "Failure reason from Automation Selenium\n\n" + iTestResult.getThrowable().getMessage() + "\n";
+            issueDescription.concat(ExceptionUtils.getFullStackTrace(iTestResult.getThrowable()));
+            String issueSummary = iTestResult.getMethod().getConstructorOrMethod().getMethod().getName() + " Failed in Automation Selenium";
+            JiraServiceProvider.createJiraIssue("Bug", issueSummary, issueDescription);
+            JiraServiceProvider.addAttachmentToJiraIssue(CaptureHelpers.getScreenshotAbsolutePath(iTestResult.getName()));
+            JiraServiceProvider.addAttachmentToJiraIssue("logs/applog.log");
+            
+        }
+
+    
     }
 
     @Override

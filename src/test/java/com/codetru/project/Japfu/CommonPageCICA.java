@@ -20,7 +20,12 @@ public class CommonPageCICA {
 	private F_Timesheet_Approval_Page step_4Page;
 	private DashboardValidationsPage step_6Page;
 	private F_Timesheet_Approval_Page2 step_8Page;
-
+	private	Employee_Edit_and_Submit_Page step_9Page;
+	private	Approve_Employee_Edits_Page step_10Page;
+	
+	
+	
+	
 	public A_LoginPage getLoginPage() {
 		if (loginCICA == null) {
 			loginCICA = new A_LoginPage();
@@ -75,6 +80,20 @@ public class CommonPageCICA {
 			step_8Page = new F_Timesheet_Approval_Page2();
 		}
 		return step_8Page;
+	}
+	
+	public Employee_Edit_and_Submit_Page getStep_9Page() {
+		if (step_9Page == null) {
+			step_9Page = new Employee_Edit_and_Submit_Page();
+		}
+		return step_9Page;
+	}
+	
+	public Approve_Employee_Edits_Page getStep_10Page() {
+		if (step_10Page == null) {
+			step_10Page = new Approve_Employee_Edits_Page();
+		}
+		return step_10Page;
 	}
 
 	//  ------------------------------------------------------------------------------------------------------------------

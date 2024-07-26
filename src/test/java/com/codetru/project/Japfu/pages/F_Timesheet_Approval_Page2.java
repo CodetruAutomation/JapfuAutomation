@@ -160,7 +160,7 @@ public class F_Timesheet_Approval_Page2 extends CommonPageCICA {
 		sleep(1);
 		clickElement(Yes_Button);
 		sleep(0.5);
-		setText(Reject_Comment, "Update the Timesheet and submit again"); 
+		setText(Reject_Comment, "OT hours mis-match, review and re-submit"); 
 		sleep(0.5);
 		clickElement(Yes_Button);
 		sleep(1);

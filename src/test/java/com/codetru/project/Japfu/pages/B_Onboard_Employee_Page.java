@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import com.Japfu.keywords.WebUI;
 import com.Japfu.utils.DataGenerateUtils;
 import com.codetru.project.Japfu.CommonPageCICA;
+import com.codetru.project.Japfu.ProjectUtils;
 
 
 
@@ -59,7 +60,7 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 	private By Employment_Type = By.xpath("//label[.='Employment Type']/following-sibling::div/input[@role='combobox']");
 	private By Consultant = By.xpath("//li[.='Consultant']");
 	private By Contractor = By.xpath("//li[.='Contractor']");
-	
+
 	//Consultant
 	//Contractor
 
@@ -123,7 +124,7 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 
 	private By Congratulation = By.xpath("//div[.='Congratulations']");
 	private By BackTOHome = By.xpath("//button[normalize-space()='Go To Home']");
-	
+
 	public static String fname;
 	public static String Lname;
 	public static String email;
@@ -151,21 +152,20 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		sleep(1);
 		setText(FirstName, fname);
 		sleep(0.5);
-//		WebUI.clearTextCtrlA(FirstName);
-//		WebUI.clearAndFillText(FirstName, fname);
-		sleep(1);
 		setText(LastName, Lname);
 		sleep(0.5);
-//		WebUI.clearTextCtrlA(FirstName);
-//		WebUI.clearAndFillText(LastName, Lname);
-		clickElement(DOB);
+		
+		ProjectUtils.clickElementForJira(DOB);
+		sleep(0.5);
 		clickElement(DOB_year);
+		sleep(0.5);
 		clickElement(DOB_year_1998);
+		sleep(0.5);
 		clickElement(DOB_Date_1);
-
+		sleep(0.5);
 		clickElement(Gender);
 		clickElement(Gender_value);
-
+		sleep(0.5);
 		clickElement(Marital);
 		clickElement(Marital_status);
 		sleep(1);
@@ -179,9 +179,9 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		sleep(1);
 
 		email =  DataGenerateUtils.randomEmail();
-//		setText(Email_id, "asasas");
-//		sleep(1);
-		
+		//		setText(Email_id, "asasas");
+		//		sleep(1);
+
 		WebUI.clearAndFillText(Email_id, email);
 		System.out.println("First Name ="+fname);
 		System.out.println("Last Name ="+Lname);
@@ -204,7 +204,7 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		clickElement(Save_Button);
 
 		//Employment details
-		
+		sleep(1);
 		clickElement(Save_Button);
 		sleep(1);
 		clickElement(Employment_Type);
@@ -239,7 +239,7 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		WebUI.scrollToElementAtBottom(Save_Button);
 
 		clickElement(Save_Button);
-
+		sleep(1);
 		setText(Emergency_Contact1_Name, DataGenerateUtils.randomMiddleName());
 		setText(Emergency_Contact1_Mobile, DataGenerateUtils.randomPhoneNumber());
 		clickElement(Emergency_Contact1_Relation);
@@ -282,16 +282,51 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		sleep(1);
 		isElementVisible(Personal_Documents, 20);
 		clickElement(Skip_Button);
+		
+		sleep(2);
+		clickElement(Cheque_Upload);
+		sleep(1);
+
+		String filePath = System.getProperty("user.dir")+"\\src\\test\\resources\\testdataCMS\\I9 Document.jpg";
+
+		StringSelection selection = new StringSelection(filePath);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		
+		sleep(2);
+		clickElement(Cheque_Upload);
+		sleep(1);
+
+		String filePath1 = System.getProperty("user.dir")+"\\src\\test\\resources\\testdataCMS\\W4 form.jpg";
+
+		StringSelection selection1 = new StringSelection(filePath1);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection1, null);
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		sleep(2);
 		clickElement(Cheque_Upload);
 		sleep(1);
-		String filePath = "C:\\Users\\Codetru\\Downloads\\Void Cheque.jpg";
-		Robot robot = new Robot();
+
+		String filePath2 = System.getProperty("user.dir")+"\\src\\test\\resources\\testdataCMS\\Void CHeque.jpg";
 
 		// Copy the file path to the clipboard
-		StringSelection selection = new StringSelection(filePath);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+		StringSelection selection2 = new StringSelection(filePath2);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection2, null);
 
 		// Press Ctrl + V to paste the file path
 		sleep(1);
@@ -306,7 +341,7 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 
 		sleep(2);
 		setText(Bank_Name, "Citizens Bank");
-		///////////////////////////////////////////////////////////////////////////////////////////////////
+
 		clickElement(Account_Type);
 		clickElement(Savings);
 
@@ -317,22 +352,8 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		setText(Confirm_Routing_Number, "011075150 ");
 
 		moveToElement(Finish_Button);
-
-		sleep(2);
-		clickElement(Cheque_Upload);
-		sleep(1);
-
-		//		StringSelection selection1 = new StringSelection(filePath);
-		//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection1, null);
-
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		sleep(2);
+		sleep(0.5);
+		
 		clickElement(Finish_Button);
 
 		sleep(2);

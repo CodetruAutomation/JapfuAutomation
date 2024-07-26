@@ -1,25 +1,26 @@
 package com.codetru.project.Japfu.testcases;
 
+import org.testng.annotations.Test;
 import com.Japfu.constants.FrameworkConstants;
 import com.Japfu.helpers.ExcelHelpers;
 import com.Japfu.utils.JiraCreateIssue;
 import com.codetru.common.BaseTest;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import org.testng.annotations.Test;
 
-@Epic("Regression Test CMS")
-@Feature("Login Test")
-public class DashboardValidationTest extends BaseTest {
-
+public class Approve_Employee_Edits_Test extends BaseTest {
+	
 	  
 	@JiraCreateIssue(isCreateIssue = true)
 	@Test(priority = 1)
-	public void TC_DashboardValidationAfterTimeSheetSUbmission() {
+	public void Approve_Employee_Edits() {
+		
 		ExcelHelpers excel = new ExcelHelpers();
 		excel.setExcelFile(FrameworkConstants.EXCEL_CMS_LOGIN, "Login");
-		getStep_6Page().Get_Value_From_DB_AP();
-		getStep_6Page().Get_Data_From_Clients_And_Validate();
-		
+	
+		getLoginPage().Valid_Username_Password("emma@doid.ai", "Codetru@004");
+		getStep_10Page().Approve_Employee_Personal_Details();
+		getStep_10Page().Approve_Employee_Personal_Details();
+		getStep_3Page().Logout();
 	}
 }
+
+

@@ -4,19 +4,21 @@ import org.testng.annotations.Test;
 
 import com.Japfu.constants.FrameworkConstants;
 import com.Japfu.helpers.ExcelHelpers;
+import com.Japfu.utils.JiraCreateIssue;
 import com.codetru.common.BaseTest;
 
 public class F_Timesheet_Approval_Test extends BaseTest {
-
+	
+	@JiraCreateIssue(isCreateIssue = true)
 	@Test
 	public void TC_Timesheet_Approval_of_Doid_ai() throws Exception {
 
 
 		ExcelHelpers excel = new ExcelHelpers();
-		excel.setExcelFile(FrameworkConstants.EXCEL_CMS_LOGIN, "Login");
+		excel.setExcelFile(FrameworkConstants.EXCEL_ENCRIPTED_CREDENTIALS, "NormalText");
 
 		getLoginPage().Launch_Url();
-		getLoginPage().Valid_Username_Password("emma@doid.ai","Codetru@007");
+		getLoginPage().Encripted_Credentials(1);
 
 		getStep_4Page().TimeSheet();
 

@@ -1,11 +1,14 @@
 package com.codetru.project.Japfu.testcases;
 
 import org.testng.annotations.Test;
+
+import com.Japfu.utils.JiraCreateIssue;
 import com.codetru.common.BaseTest;
 
 public class D_Placement_Test extends BaseTest {
 
-
+	  
+	@JiraCreateIssue(isCreateIssue = true)
 	@Test(priority = 1)
 	public void TC_Employee_Placement() throws Exception {
 
