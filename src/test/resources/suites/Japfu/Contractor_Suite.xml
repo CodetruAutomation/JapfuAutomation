@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Japfu web" thread-count="10" verbose="1">
+
+    <listeners>
+        <listener class-name="com.codetru.listeners.AnnotationTransformer" />
+    </listeners>
+   
+  <test name="DOID Organization">
+        
+      <classes>
+			
+            <class name="com.codetru.project.Japfu.testcases.A_LoginTest" />
+          <class name="com.codetru.project.Japfu.testcases.C_Vendor_Onboard_Test" />
+           	<class name="com.codetru.project.Japfu.contractor.B_Onboard_Employee_Test" />
+         	<class name="com.codetru.project.Japfu.testcases.C_Client_Onboard_Test" />
+            <class name="com.codetru.project.Japfu.testcases.D_Placement_Test" />
+          
+        </classes>
+        
+</test>
+ 
+    
+</suite>
+<!-- 
+-->

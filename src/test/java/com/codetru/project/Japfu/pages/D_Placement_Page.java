@@ -6,6 +6,8 @@ import static com.Japfu.keywords.WebUI.setText;
 import static com.Japfu.keywords.WebUI.sleep;
 import static com.Japfu.keywords.WebUI.verifyElementVisible;
 import org.openqa.selenium.By;
+
+import com.Japfu.driver.DriverManager;
 import com.Japfu.utils.DataGenerateUtils;
 import com.codetru.project.Japfu.CommonPageCICA;
 
@@ -34,6 +36,10 @@ public class D_Placement_Page extends CommonPageCICA {
 	private By Continue_button = By.xpath("//button[.='Continue']");
 
 	private By JobTitle = By.xpath("//label[.='Job Title']/following-sibling::div/input[@role='combobox']");
+	private By AddjobButton = By.xpath("//button[text()='New Job Title']");
+	private By Add_JobTitle = By.xpath("(//label[.='Job Title']/following-sibling::div/input[@type='text'])[2]");
+	private By Save_Button = By.xpath("//button[.='Save']");
+
 	private By Project = By.xpath("//li[.='Project']");
 
 	private By Address_1= By.name("address_line_one");
@@ -50,7 +56,7 @@ public class D_Placement_Page extends CommonPageCICA {
 	private By Value_Button = By.xpath("//button[.='Value']");
 	private By Payrate= By.name("value");
 
-//	private By SameASPayrate = By.xpath("//div[.='Same as Payrate']");
+	private By SameASPayrate = By.xpath("//div[.='Same as Payrate']");
 
 	private By Timesheet_Cycle = By.xpath("//label[.='Timesheet Cycle']/following-sibling::div/input[@role='combobox']");
 	private By Semi_monthly = By.xpath("//li[.='Weekly']");
@@ -63,9 +69,11 @@ public class D_Placement_Page extends CommonPageCICA {
 
 	private By logo = By.xpath("//img[@alt='Logo']");
 
-	private By Profile_Icon = By.xpath("//img[contains(@src , 'https://japfu-documents.codetru.org/avatar')]");
+	private By Profile_Icon = By.xpath("//img[contains(@src,'https://japfu-organization')]");
 
 	private By Logout = By.xpath("(//div[.='Log out'])[2]");
+
+	private By Left_Arrow = By.xpath("//*[local-name()='svg' and @data-testid='ArrowLeftIcon']");
 
 	public void placement() throws Exception {
 
@@ -89,6 +97,9 @@ public class D_Placement_Page extends CommonPageCICA {
 		setText(OT_Bill_rate, "95");
 		sleep(1);
 		clickElement(StartDate);
+		sleep(0.5);
+		clickElement(Left_Arrow);
+		sleep(0.5);
 		clickElement(Date_1);
 
 		sleep(1);
@@ -100,8 +111,34 @@ public class D_Placement_Page extends CommonPageCICA {
 		sleep(1);
 		moveToElement(JobTitle);
 		clickElement(JobTitle);
-		clickElement(Project);	
+		sleep(1);
 
+//		if(DriverManager.getDriver().findElement(No_option).isDisplayed()) {
+//			clickElement(AddjobButton);	
+//			setText(Add_JobTitle,"Project");
+//			clickElement(Save_Button);
+//		}else if(DriverManager.getDriver().findElement(Project).isDisplayed()){
+//			clickElement(Project);
+//		}
+		
+		
+		try {
+			
+			DriverManager.getDriver().findElement(Project).click();
+			
+		} catch (Exception e) {
+			clickElement(AddjobButton);	
+			sleep(0.3);
+			setText(Add_JobTitle,"Project");
+			sleep(0.3);
+			clickElement(Save_Button);
+			sleep(0.3);
+			clickElement(JobTitle);
+			sleep(0.3);
+			DriverManager.getDriver().findElement(Project).click();
+		}
+
+		sleep(0.5);
 		setText(Address_1,"278 S Franklin St");
 
 		clickElement(State);
@@ -125,6 +162,18 @@ public class D_Placement_Page extends CommonPageCICA {
 
 		setText(Payrate, "85");
 		sleep(1);
+
+		try {
+			DriverManager.getDriver().findElement(SameASPayrate).click();
+		} catch (Exception e) {
+			System.out.println("Same as payrate is not displayed");
+		}
+//		if(!verifyElementVisible(SameASPayrate)) {
+//			System.out.println("Same as payrate is not displayed");
+//		}else if(verifyElementVisible(SameASPayrate)){
+//			clickElement(SameASPayrate);
+//		}
+
 		clickElement(Continue_button);
 
 	}
@@ -149,7 +198,6 @@ public class D_Placement_Page extends CommonPageCICA {
 		clickElement(logo);
 		sleep(2);
 
-
 	}
 
 
@@ -160,7 +208,10 @@ public class D_Placement_Page extends CommonPageCICA {
 		clickElement(Logout);
 	}
 
+	public void JobtitleCreation() {
 
+		clickElement(Profile_Icon);
+	}
 
 
 }

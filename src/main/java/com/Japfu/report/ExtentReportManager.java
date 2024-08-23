@@ -52,7 +52,7 @@ public class ExtentReportManager {
 
             ExtentSparkReporter spark = new ExtentSparkReporter(link);
             extentReports.attachReporter(spark);
-            spark.config().setTheme(Theme.DARK);
+            spark.config().setTheme(Theme.STANDARD);
             spark.config().setDocumentTitle(FrameworkConstants.REPORT_TITLE);
             spark.config().setReportName(FrameworkConstants.REPORT_TITLE);
             extentReports.setSystemInfo("Framework Name", FrameworkConstants.REPORT_TITLE);

@@ -1,4 +1,4 @@
-package com.codetru.project.Japfu.pages;
+package com.codetru.project.Japfu.contractor;
 
 import static com.Japfu.keywords.WebUI.clickElement;
 import static com.Japfu.keywords.WebUI.isElementVisible;
@@ -19,7 +19,7 @@ import com.codetru.project.Japfu.CommonPageCICA;
 
 
 
-public class B_Onboard_Employee_Page extends CommonPageCICA{
+public class B_Onboard_Contractor_Employee_Page extends CommonPageCICA{
 	
 	private By Consultant = By.xpath("//li[.='Consultant']");
 	private By Contractor = By.xpath("//li[.='Contractor']");
@@ -218,13 +218,13 @@ public class B_Onboard_Employee_Page extends CommonPageCICA{
 		clickElement(Save_Button);
 		sleep(1);
 		clickElement(Employment_Type);
-		clickElement(Consultant);
+		clickElement(Contractor);
 
 		clickElement(Employment_category);
 		clickElement(W2);
 		
-//		clickElement(Vendor_Type);
-//		clickElement(Vendor);
+		clickElement(Vendor_Type);
+		clickElement(Vendor);
 
 		clickElement(Joining_Calander);
 		//		clickElement(Joining_year);

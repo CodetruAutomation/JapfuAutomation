@@ -1,6 +1,8 @@
 package com.codetru.project.Japfu.pages;
 
 import com.Japfu.constants.FrameworkConstants;
+import com.Japfu.helpers.ExcelHelpers;
+import com.Japfu.keywords.WebUI;
 import com.codetru.project.Japfu.CommonPageCICA;
 
 import static com.Japfu.keywords.WebUI.*;
@@ -26,88 +28,7 @@ public class A_LoginPage extends CommonPageCICA {
 		//	verifyElementVisible(Logo);
 	}
 
-	//	public void WithoutUsername_Password() {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
-	//
-	//	public void Login_With_Only_Digits(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		setText(username, email);
-	//		setText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
-	//
-	//	public void Login_With_Only_SpecialCharacters(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clearAndFillText(username, email);
-	//		clearAndFillText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
-	//
-	//	public void ValidUsername_InvalidPassword(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clearAndFillText(username, email);
-	//		clearAndFillText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
-	//
-	//	public void InvalidUsername_validPassword(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clearAndFillText(username, email);
-	//		clearAndFillText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//
-	//	}
-	//
-	//	public void ValidUsername_WithoutPassword(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clearAndFillText(username, email);
-	//		clearAndFillText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
-	//
-	//	public void WithoutUsername_ValidPassword(String email, String Password) {
-	//		openLoginPage();
-	//		sleep(2);
-	//		clearAndFillText(username, email);
-	//		clearAndFillText(password, Password);
-	//		clickElement(InPatient); 
-	//		clickElement(loginButton);
-	//		waitForPageLoaded();
-	//		sleep(1);
-	//		verifyEquals(getTextElement(Error_message).trim(), "Invalid username/password. Please try again.", "Invalid error message");
-	//	}
+	
 
 	public void Valid_Username_Password(String email, String password) {
 	
@@ -123,10 +44,25 @@ public class A_LoginPage extends CommonPageCICA {
 		//verifyElementVisible(Logo, "Unable to login in to the application");
 
 	}
+	
+	public void Encripted_Credentials(int v) {
+		ExcelHelpers excel = new ExcelHelpers();
+		excel.setExcelFile(FrameworkConstants.EXCEL_ENCRIPTED_CREDENTIALS, "NormalText");
+		
+		Encription_Login_Page.TC_Valid_Username_Password(v);
+		WebUI.logInfoMessage("Before Encription Email ID: "+Encription_Login_Page.De_email);
+		WebUI.logInfoMessage("Before Encription Password: "+Encription_Login_Page.De_password);
+		WebUI.logInfoMessage("After Encription Email ID: "+Encription_Login_Page.En_email);
+		WebUI.logInfoMessage("After Encription Password: "+Encription_Login_Page.En_password);
+		
+		getLoginPage().Valid_Username_Password(Encription_Login_Page.De_email,Encription_Login_Page.De_password);
+		
+	}
+	
 	public void FailedCase() {
 		
 		
-		clickElement(Password_Btn);
+		clickElement(Password);
 		
 		//verifyElementVisible(Logo, "Unable to login in to the application");
 

@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022 Anh Tester
- * Automation Framework Selenium
- */
-
 package com.Japfu.utils;
 
 import org.zeroturnaround.zip.ZipUtil;

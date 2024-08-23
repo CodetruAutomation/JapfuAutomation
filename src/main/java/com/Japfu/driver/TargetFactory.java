@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022.
- * Automation Framework Selenium - Anh Tester
- */
-
 package com.Japfu.driver;
 
 import com.Japfu.constants.FrameworkConstants;

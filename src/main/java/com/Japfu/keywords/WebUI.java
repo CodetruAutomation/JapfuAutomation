@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022 Anh Tester
- * Automation Framework Selenium
- */
-
 package com.Japfu.keywords;
 
 import com.Japfu.constants.FrameworkConstants;
@@ -2839,7 +2834,11 @@ public class WebUI {
         smartWait();
         AllureManager.saveTextLog("Get text of element " + by.toString());
         AllureManager.saveTextLog("==> The Text is: " + waitForElementVisible(by).getText());
+        if (ExtentTestManager.getExtentTest() != null) {
+            ExtentReportManager.pass("Get text of element "+ waitForElementVisible(by).getText()+" "+ by);
+        }
         return waitForElementVisible(by).getText().trim();
+        
     }
 
     /**
@@ -3517,4 +3516,15 @@ public class WebUI {
                 .collect(Collectors.toList());
     }
 
+    @Step("Log Information Message")
+    public static void logInfoMessage(String message) {
+        smartWait();
+        LogUtils.info(message);
+        if (ExtentTestManager.getExtentTest() != null) {
+            ExtentReportManager.info(message);
+        }
+        AllureManager.saveTextLog(message);
+    }
+ 
+    
 }

@@ -1,9 +1,4 @@
-///*
-// * Copyright (c) 2022. Anh Tester
-// * Automation Framework Selenium
-// */
-//
-//package com.anhtester.dataprovider;
+//package com.codetru.dataprovider;
 //
 //import com.Japfu.constants.FrameworkConstants;
 //import com.Japfu.helpers.ExcelHelpers;

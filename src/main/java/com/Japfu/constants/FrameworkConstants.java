@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022 Anh Tester
- * Automation Framework Selenium
- */
-
 package com.Japfu.constants;
 
 import com.Japfu.helpers.Helpers;
@@ -26,7 +21,9 @@ public final class FrameworkConstants {
     public static final String EXCEL_CMS_LOGIN = PropertiesHelpers.getValue("EXCEL_CMS_LOGIN");
     public static final String EXCEL_CMS_DATA = PropertiesHelpers.getValue("EXCEL_CMS_DATA");
     public static final String EXCEL_CMS_PRODUCTS_USER = PropertiesHelpers.getValue("EXCEL_CMS_PRODUCTS_USER");
-
+    public static final String EXCEL_ENCRIPTED_CREDENTIALS = PropertiesHelpers.getValue("EXCEL_CMS_Encription_credentials");
+    
+    
     public static final String BROWSER = PropertiesHelpers.getValue("BROWSER");
     public static final String URL_CRM = PropertiesHelpers.getValue("URL_CRM");
     public static final String URL_CMS_ADMIN = PropertiesHelpers.getValue("URL_CMS_ADMIN");

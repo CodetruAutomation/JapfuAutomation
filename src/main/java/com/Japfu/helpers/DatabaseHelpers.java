@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022 Anh Tester
- * Automation Framework Selenium
- */
-
 package com.Japfu.helpers;
 
 import java.sql.Connection;
